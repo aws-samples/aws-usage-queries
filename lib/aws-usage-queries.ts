@@ -309,7 +309,7 @@ export class AwsUsageQueriesStack extends cdk.Stack {
         { name: "month", type: Schema.INTEGER }
       ],
       database: database,
-      tableName: "monthly_vpcu_hours_by_account",
+      tableName: "monthly_vcpu_hours_by_account",
       description: "Monthly vcpu hours, grouped by account",
       statement: fs.readFileSync(path.join(__dirname, "vcpuHoursByAccountView.sql")).toString(),
       placeHolders: {
@@ -328,7 +328,7 @@ export class AwsUsageQueriesStack extends cdk.Stack {
         { name: "month", type: Schema.INTEGER }
       ],
       database: database,
-      tableName: "monthly_spot_vpcu_hours_by_account",
+      tableName: "monthly_spot_vcpu_hours_by_account",
       description: "Monthly vcpu hours share of spot by account",
       statement: fs.readFileSync(path.join(__dirname, "spotVcpuHoursByAccountView.sql")).toString(),
       placeHolders: {
