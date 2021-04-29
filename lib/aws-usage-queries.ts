@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: MIT-0
 import { CfnTable, ClassificationString, Database, InputFormat, OutputFormat, Schema, SerializationLibrary, Table } from '@aws-cdk/aws-glue';
 import { BlockPublicAccess, Bucket, BucketEncryption } from '@aws-cdk/aws-s3';
-import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import * as cdk from '@aws-cdk/core';
 import { CfnParameter, RemovalPolicy } from '@aws-cdk/core';
 import * as fs from 'fs';
 import * as path from 'path';
 import { GlueView } from './glue-view';
+import { LayerBucketDeployment } from './layer-bucket-deployment';
 
 export class AwsUsageQueriesStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -39,7 +39,6 @@ export class AwsUsageQueriesStack extends cdk.Stack {
 
     const database = new Database(this, "database", {
       databaseName: databaseName.valueAsString,
-
     });
 
     const referenceDataBucket = new Bucket(this, 'referenceDataBucket', {
@@ -49,10 +48,12 @@ export class AwsUsageQueriesStack extends cdk.Stack {
       enforceSSL: true
     });
 
-    new BucketDeployment(this, 'DeployUsageQueriesReferenceData', {
-      destinationBucket: referenceDataBucket,
-      sources: [Source.asset('./referenceData')],
-      retainOnDelete: false
+    new LayerBucketDeployment(this, 'DeployUsageQueriesReferenceData', {
+      source: path.join(__dirname, "..", "referenceData"),
+      wipeWholeBucket: true,
+      // Don't use a bucket with data that must not be deleted when wipeWholeBucket is true.
+      // It's true here to delete the referenceDataBucket when the stack is destroyed.
+      destinationBucket: referenceDataBucket
     });
 
     function setSerdeInfo(table: Table, serdeInfo: { [key: string]: string }) {
