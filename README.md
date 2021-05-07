@@ -18,7 +18,9 @@ You can modify the template to add your own data and queries.
 
 ## Get Started
 
-**Coming soon**: deploy the sample template from the AWS Serverless Application Repository.
+This application is available in the AWS Serverless Application Repository. You can deploy it to your account from there:
+
+[![cloudformation-launch-button](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://serverlessrepo.aws.amazon.com/#/applications/arn:aws:serverlessrepo:us-east-1:387304072572:applications~aws-usage-queries)
 
 ### Compile the CDK template
 
