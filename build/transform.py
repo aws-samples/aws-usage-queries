@@ -28,7 +28,7 @@ def main(assets, template, bucket, version, build_no, commit):
 
     # read assets file
     with open(assets) as input_file:
-        asset_doc = yaml.load(input_file, Loader=yaml.FullLoader)
+        asset_doc = yaml.safe_load(input_file)
 
     change_asset_destination(asset_doc, bucket)
 
@@ -38,7 +38,7 @@ def main(assets, template, bucket, version, build_no, commit):
 
     # read template file
     with open(template) as input_file:
-        template_doc = yaml.load(input_file, Loader=yaml.FullLoader)
+        template_doc = yaml.safe_load(input_file)
 
     change_template_bucket(template_doc, bucket)
 
