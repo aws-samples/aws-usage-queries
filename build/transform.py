@@ -24,7 +24,7 @@ def change_template_bucket(doc, bucket):
 
         del config["Metadata"]
 
-def main(assets, template, bucket, version, build_no, commit):
+def main(assets, template, package, bucket, build_no, commit):
 
     # read assets file
     with open(assets) as input_file:
@@ -50,18 +50,20 @@ def main(assets, template, bucket, version, build_no, commit):
 
     commit_short = commit[:6]
 
-    sem_ver = ("%s+%s.%s" % (version, build_no, commit_short))
+ # read package file
+    with open(package) as package_file:
+        package_doc = yaml.safe_load(package_file)
+
+    sem_ver = ("%s+%s.%s" % (package_doc["version"], build_no, commit_short))
 
     template_doc["Metadata"] = {
         "AWS::ServerlessRepo::Application": {
-            "Name": "aws-usage-queries",
-            "Description": """This application bootstraps everything needed to
-                query the AWS Cost and Usage reports through Amazon Athena. It
-                also includes reference data and preconfigured SQL queries.""",
-            "Author": "Steffen Grunwald",
-            "SpdxLicenseId": "MIT-0",
-            "HomePageUrl": "https://github.com/aws-samples/aws-usage-queries",
-            "SourceCodeUrl": ("https://github.com/aws-samples/aws-usage-queries/tree/%s" % commit_short),
+            "Name": package_doc["name"],
+            "Description": package_doc["description"],
+            "Author": package_doc["author"]["name"],
+            "SpdxLicenseId": package_doc["license"],
+            "HomePageUrl": package_doc["homepage"],
+            "SourceCodeUrl": ("%s/tree/%s" % (package_doc["homepage"], commit_short)),
             "SemanticVersion": sem_ver
         }
     }
@@ -71,8 +73,8 @@ def main(assets, template, bucket, version, build_no, commit):
 if __name__ == "__main__":
     assets = sys.argv[1]
     template = sys.argv[2]
-    bucket = sys.argv[3]
-    version = sys.argv[4]
+    package = sys.argv[3]
+    bucket = sys.argv[4]
     build_no = sys.argv[5]
     commit = sys.argv[6]
-    main(assets, template, bucket, version, build_no, commit)
+    main(assets, template, package, bucket, build_no, commit)

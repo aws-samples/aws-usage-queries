@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-npm install -g aws-cdk
-npm install -g cdk-assets
+npm remove -g aws-cdk cdk-assets
+npm install -g aws-cdk cdk-assets
 npm install
 npm run test
 npm run build
@@ -12,8 +12,8 @@ cdk synth > /dev/null
 python3 build/transform.py \
     cdk.out/AwsUsageQueriesStack.assets.json \
     cdk.out/AwsUsageQueriesStack.template.json \
+    package.json \
     $ARTIFACT_BUCKET_NAME \
-    $VERSION \
     $CODEBUILD_BUILD_NUMBER \
     $CODEBUILD_RESOLVED_SOURCE_VERSION
 

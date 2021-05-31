@@ -1,6 +1,12 @@
 {
   "name": "aws-usage-queries",
   "version": "0.1.0",
+  "description": "This application bootstraps everything needed to query the AWS Cost and Usage reports through Amazon Athena. It also includes reference data and preconfigured SQL queries.",
+  "author": {
+    "name": "Steffen Grunwald"
+  },
+  "license": "MIT-0",
+  "homepage": "https://github.com/aws-samples/aws-usage-queries",
   "bin": {
     "aws-usage-queries": "bin/aws-usage-queries.js"
   },
