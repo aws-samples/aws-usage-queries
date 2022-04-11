@@ -1,6 +1,6 @@
 {
   "name": "aws-usage-queries",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This application bootstraps everything needed to query the AWS Cost and Usage reports through Amazon Athena. It also includes reference data and preconfigured SQL queries.",
   "author": {
     "name": "Steffen Grunwald"
