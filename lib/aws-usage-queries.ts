@@ -242,7 +242,7 @@ export class AwsUsageQueriesStack extends cdk.Stack {
     setTableParameters(sourceTable, {
       "projection.enabled": "true",
       "projection.year.type": "integer",
-      "projection.year.range": "2020,2022",
+      "projection.year.range": "2020,2024",
       "projection.month.type": "integer",
       "projection.month.range": "1,12",
     });
