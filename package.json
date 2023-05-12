@@ -24,12 +24,12 @@
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
     "typescript": "~3.9.7",
-    "@aws-cdk/assert": "^1.174.0"
+    "@aws-cdk/assert": "^ 1.201.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-glue": "^1.174.0",
-    "@aws-cdk/aws-s3-deployment": "^1.174.0",
-    "@aws-cdk/core": "^1.174.0",
+    "@aws-cdk/aws-glue": "^ 1.201.0",
+    "@aws-cdk/aws-s3-deployment": "^ 1.201.0",
+    "@aws-cdk/core": "^ 1.201.0",
     "aws-sdk": "^2.1354.0",
     "source-map-support": "^0.5.21"
   }
