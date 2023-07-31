@@ -1,9 +1,10 @@
-import { Code, Function, LayerVersion, Runtime } from '@aws-cdk/aws-lambda';
-import { RetentionDays } from '@aws-cdk/aws-logs';
-import { IBucket } from '@aws-cdk/aws-s3';
-import { Construct, CustomResource, Duration, RemovalPolicy } from '@aws-cdk/core';
-import { Provider } from '@aws-cdk/custom-resources';
-import { AwsCliLayer } from '@aws-cdk/lambda-layer-awscli';
+import { CustomResource, Duration, RemovalPolicy } from 'aws-cdk-lib';
+import { Code, Function, LayerVersion, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { RetentionDays } from 'aws-cdk-lib/aws-logs';
+import { IBucket } from 'aws-cdk-lib/aws-s3';
+import { Provider } from 'aws-cdk-lib/custom-resources';
+import { AwsCliLayer } from 'aws-cdk-lib/lambda-layer-awscli';
+import { Construct } from 'constructs';
 
 import path = require('path');
 
@@ -51,7 +52,7 @@ export class LayerBucketDeployment extends Construct {
         const bucketDeplomentFn = new Function(this, "BucketDeplomentFn", {
             code: Code.fromAsset(props.source),
             handler: "deploy.on_event",
-            runtime: Runtime.PYTHON_3_7,
+            runtime: Runtime.PYTHON_3_11,
             timeout: Duration.minutes(1),
             memorySize: 512,
             layers: [

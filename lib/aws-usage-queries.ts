@@ -1,16 +1,17 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import { CfnTable, ClassificationString, Database, InputFormat, OutputFormat, Schema, SerializationLibrary, Table } from '@aws-cdk/aws-glue';
-import { BlockPublicAccess, Bucket, BucketEncryption } from '@aws-cdk/aws-s3';
-import * as cdk from '@aws-cdk/core';
-import { CfnParameter, RemovalPolicy } from '@aws-cdk/core';
 import * as fs from 'fs';
 import * as path from 'path';
 import { GlueView } from './glue-view';
 import { LayerBucketDeployment } from './layer-bucket-deployment';
+import { CfnParameter, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import { BlockPublicAccess, Bucket, BucketEncryption } from 'aws-cdk-lib/aws-s3';
+import { ClassificationString, Database, InputFormat, OutputFormat, Schema, SerializationLibrary, Table } from '@aws-cdk/aws-glue-alpha';
+import { CfnTable } from 'aws-cdk-lib/aws-glue';
 
-export class AwsUsageQueriesStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class AwsUsageQueriesStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     const curBucketName = new CfnParameter(this, "CurBucketName", {

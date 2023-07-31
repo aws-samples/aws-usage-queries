@@ -1,8 +1,9 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import { CfnTable, Column, IDatabase, ITable } from '@aws-cdk/aws-glue';
-import * as cdk from '@aws-cdk/core';
-import { Construct, Resource } from '@aws-cdk/core';
+import { Column, IDatabase, ITable } from '@aws-cdk/aws-glue-alpha';
+import { Fn, Resource } from 'aws-cdk-lib'
+import { CfnTable } from 'aws-cdk-lib/aws-glue';
+import { Construct } from 'constructs';
 
 export interface ViewProps {
     /**
@@ -94,7 +95,7 @@ export class GlueView extends Resource implements ITable {
                 },
                 partitionKeys: [],
                 tableType: 'VIRTUAL_VIEW',
-                viewOriginalText: "/* Presto View: " + cdk.Fn.base64(cdk.Fn.sub(JSON.stringify(viewOriginalText), placeHolders)) + " */"
+                viewOriginalText: "/* Presto View: " + Fn.base64(Fn.sub(JSON.stringify(viewOriginalText), placeHolders)) + " */"
             },
         });
         this.node.defaultChild = tableResource;
