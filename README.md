@@ -1,6 +1,10 @@
+# ⚠️ Deprecation Warning
+
+This repository is no longer maintained as of Nov 2025. Please read more on [Data Exports](https://docs.aws.amazon.com/guidance/latest/cloud-intelligence-dashboards/data-exports.html) in the Cloud Intelligence Dashboards to automatically create the data exports, and corresponding AWS Glue tables. Consider the Sustainability Proxy Metrics from its [dashboards](https://docs.aws.amazon.com/guidance/latest/cloud-intelligence-dashboards/dashboards.html) to explore the usage focussed perspective of the [AWS Cost and Usage reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) (CUR).
+
 # AWS usage queries
 
-If you want to identify the top AWS usage in your AWS accounts the [AWS Cost and Usage reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) (CUR) have much of the data required. You can [query the CUR data through Amazon Athena](https://docs.aws.amazon.com/cur/latest/userguide/cur-query-athena.html).
+If you want to identify the top AWS usage in your AWS accounts the CUR have much of the data required. You can [query the CUR data through Amazon Athena](https://docs.aws.amazon.com/cur/latest/userguide/cur-query-athena.html).
 
 This repository is an AWS Cloud Development Kit (CDK) template that bootstraps:
 
