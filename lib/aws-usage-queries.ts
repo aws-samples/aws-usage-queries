@@ -355,5 +355,22 @@ export class AwsUsageQueriesStack extends Stack {
       }
     });
 
+    new GlueView(this, "ebsStorageByAccountView", {
+      columns: [
+        { name: "account_id", type: Schema.STRING },
+        { name: "volume_type", type: Schema.STRING },
+        { name: "usage_gb", type: Schema.DOUBLE },
+        { name: "year", type: Schema.INTEGER },
+        { name: "month", type: Schema.INTEGER }
+      ],
+      database: database,
+      tableName: "monthly_ebs_storage_by_account",
+      description: "Monthly EBS storage by volume type and account",
+      statement: fs.readFileSync(path.join(__dirname, "ebsStorageByAccountView.sql")).toString(),
+      placeHolders: {
+        sourceTable: sourceTable.tableName
+      }
+    });
+
   }
 }
